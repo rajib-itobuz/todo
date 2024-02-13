@@ -1,0 +1,48 @@
+.bg-mysecondary {
+  background-color: #f1f2f9;
+}
+
+.bg-primary-accent {
+  background-color: #09113f;
+}
+
+.bottom-10 {
+  bottom: 2rem;
+}
+
+.card-mw {
+  width: 100%;
+}
+
+.active {
+  background-color: #f1f2f9;
+}
+
+.inactive {
+  background-color: #f7f7f7;
+}
+
+.fit-content {
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.font-sm {
+  font-size: 0.8rem;
+}
+
+.font-md {
+  font-size: 1rem;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .card-mw {
+    width: 18rem;
+  }
+}/*# sourceMappingURL=style.css.map */

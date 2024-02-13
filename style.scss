@@ -1,0 +1,52 @@
+$bg-secondary-color: #f1f2f9;
+$bg-primary-accent: #09113f;
+$active-color: $bg-secondary-color;
+$inactive-color: #f7f7f7;
+
+.bg-mysecondary {
+    background-color: $bg-secondary-color;
+}
+
+.bg-primary-accent {
+    background-color: $bg-primary-accent;
+}
+
+.bottom-10 {
+    bottom: 2rem;
+}
+
+
+.card-mw {
+    width: 100%;
+}
+
+.active {
+    background-color: $active-color;
+}
+
+.inactive {
+    background-color: $inactive-color;
+}
+
+.fit-content {
+    height: fit-content;
+    width: fit-content;
+}
+
+.font-sm {
+    font-size: .8rem;
+}
+
+.font-md {
+    font-size: 1rem;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+}
+
+@media screen and (min-width:768px) {
+    .card-mw {
+        width: 18rem;
+    }
+}

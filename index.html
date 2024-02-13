@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="d-flex flex-column vh-100 ">
+
+    <header class="container pt-3 d-flex align-items-center flex-shrink-0 ">
+        <div class="p-3 rounded-circle bg-primary-subtle fit-content">
+            <img src="images/userProf.svg" alt="userIcon" width="30px" height="30px">
+        </div>
+        <div class="ms-3">
+            <h3>My tasks</h3>
+            <h6>Lists</h6>
+        </div>
+        <div class="p-3 ms-auto rounded-circle bg-mysecondary fit-content">
+            <img src="images/bell.svg" alt="userIcon" width="30px" height="30px">
+        </div>
+
+
+    </header>
+
+    <section class="filter-section scrollbar-hidden container flex-shrink-0 d-flex my-3 gap-2 overflow-x-scroll ">
+        <div
+            class="active font-md flex-shrink-0 fit-content rounded-pill px-3 py-2 d-flex justify-content-between align-items-center">
+            All Tasks<span class="ms-1 rounded-circle p-2 font-12 bg-white fit-content d-inline-block">65</span>
+        </div>
+        <div
+            class="inactive font-md flex-shrink-0 fit-content rounded-pill px-3 py-2 d-flex justify-content-between align-items-center">
+            OnGoing<span class="ms-1 rounded-circle p-2 font-12 bg-white fit-content d-inline-block">65</span>
+        </div>
+        <div
+            class="inactive font-md flex-shrink-0 fit-content rounded-pill px-3 py-2 d-flex justify-content-between align-items-center">
+            Completed<span class="ms-1 rounded-circle p-2 font-12 bg-white fit-content d-inline-block">65</span>
+        </div>
+        <div
+            class="inactive font-md flex-shrink-0 fit-content rounded-pill px-3 py-2 d-flex justify-content-between align-items-center">
+            All Tasks<span class="ms-1 rounded-circle p-2 font-12 bg-white fit-content d-inline-block">65</span>
+        </div>
+        <div
+            class="inactive font-md flex-shrink-0 fit-content rounded-pill px-3 py-2 d-flex justify-content-between align-items-center">
+            All Tasks<span class="ms-1 rounded-circle p-2 font-12 bg-white fit-content d-inline-block">65</span>
+        </div>
+    </section>
+
+    <section class="container position-relative h-100">
+        <h4 class="mb-2">My Tasks</h4>
+        <div class="todo-container d-flex flex-wrap gap-2 ">
+            <div class="card flex-shrink-0 border border-0 card-mw">
+                <div class="card-body">
+                    <h4 id="title" class="w-75 ">meowww</h4>
+                    <h6 id="subtitle" class="mb-3 w-75 fw-light">hullaa prototype</h6>
+                    <div class="d-flex gap-2">
+                        <div
+                            class="active flex-shrink-0 fit-content rounded-pill px-4 font-sm py-2 d-flex justify-content-between align-items-center">
+                            High
+                        </div>
+                        <div class="active flex-shrink-0 fit-content rounded-pill px-3 py-2 font-sm d-flex gap-1">
+                            <img src="images/calendar.svg" alt="calendar" width="20px" height="20px">
+                            12 Oct 2023
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="rounded-circle p-3 end-0 bg-primary-accent fit-content position-absolute bottom-10">
+            <img src="images/plus.svg" alt="add-icon" width="30px" height="30px">
+        </div>
+    </section>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
