@@ -210,7 +210,7 @@ addtodoForm.addEventListener("submit", (e) => {
       };
       todoArr.push(newtodoItem);
       saveUpdate();
-    } else if (existingItemIndex === 0 && todoTitle === "") {
+    } else if (!existingItemIndex && !todoTitle) {
       createToast("Cant create blank todo");
     } else {
       createToast("To Do already exists");
