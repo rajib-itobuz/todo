@@ -1,4 +1,7 @@
 const colors = ["#ccd5ae", "#faedcd", "#f5cac3", "#bde0fe", "#fcf6bd"];
+const priorityColors = ["#ccd5ae", "#faedcd", "#f5cac3", "#bde0fe"];
+const priorityData = ["High", "Medium", "Low", "No-priority"];
+const priorityStatus = document.getElementById("priority");
 
 const todoContainer = document.getElementById("todo-container");
 const addtodoForm = document.getElementById("myForm");
@@ -68,6 +71,7 @@ const shareUidtoModal = (e) => {
 const createToDoCard = ({
   uid,
   title,
+  priority,
   dateObject,
   status,
   backgroundColor,
@@ -90,10 +94,21 @@ const createToDoCard = ({
   );
   titleText.innerText = title;
 
+  const statusDiv = document.createElement("div");
+  statusDiv.setAttribute("class", "d-block gap-2");
+
+  const priorityStatus = document.createElement("div");
+  priorityStatus.setAttribute(
+    "class",
+    "active flex-shrink-0 me-1 fit-content rounded-pill px-4 font-sm py-2 d-inline-block justify-content-between align-items-center"
+  );
+  priorityStatus.innerText = priorityData[priority];
+  priorityStatus.style.backgroundColor = priorityColors[priority];
+
   const dateStatus = document.createElement("div");
   dateStatus.setAttribute(
     "class",
-    "active flex-shrink-0 fit-content rounded-pill px-3 py-2 font-sm d-block mt-2"
+    "active flex-shrink-0 fit-content rounded-pill px-3 py-2 font-sm d-inline-block mt-2"
   );
 
   const dateLogo = document.createElement("img");
@@ -134,7 +149,8 @@ const createToDoCard = ({
     titleText.style.textDecoration = "line-through";
   }
 
-  actionDiv.append(dateStatus, completedButton, editButton);
+  statusDiv.append(priorityStatus, dateStatus);
+  actionDiv.append(statusDiv, completedButton, editButton);
   cardBody.append(titleText, actionDiv);
   cardDiv.append(cardBody);
 
@@ -171,6 +187,7 @@ addtodoForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const todoTitle = todoTitleInput.value.trim();
   const dateObject = new Date();
+  const priority = priorityStatus.value;
   const randomIndex = Math.floor(Math.random() * colors.length);
   const backgroundColor = colors[randomIndex];
   if (modalTitle.innerHTML === "Add to-do") {
@@ -186,6 +203,7 @@ addtodoForm.addEventListener("submit", (e) => {
       const newtodoItem = {
         uid: dateObject.getTime(),
         title: todoTitle,
+        priority,
         dateObject: dateObject.toDateString(),
         status: "incomplete",
         backgroundColor,
@@ -201,6 +219,7 @@ addtodoForm.addEventListener("submit", (e) => {
     const itemUid = modalSheet.dataset.uid;
     const itemIndex = todoArr.findIndex((e) => e.uid === parseInt(itemUid));
     todoArr[itemIndex].title = todoTitleInput.value;
+    todoArr[itemIndex].priority = priorityStatus.value;
     saveUpdate();
   }
 
@@ -236,6 +255,7 @@ if (modalSheet) {
       const itemUid = button.getAttribute("data-uid");
       const itemIndex = todoArr.findIndex((e) => e.uid === parseInt(itemUid));
       todoTitleInput.value = todoArr[itemIndex].title;
+      priorityStatus.value = todoArr[itemIndex].priority;
     }
   });
 }

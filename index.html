@@ -30,17 +30,14 @@
     <div id="filter-0" role="button" onclick="filterItems(event)"
       class="filter active font-md flex-shrink-0 fit-content rounded-pill px-3 py-2 d-flex justify-content-between align-items-center">
       All Tasks
-      <!-- <span class="ms-1 rounded-circle p-2 font-12 bg-white fit-content d-inline-block">65</span> -->
     </div>
     <div id="filter-1" role="button" onclick="filterItems(event)"
       class="filter font-md flex-shrink-0 fit-content rounded-pill px-3 py-2 d-flex justify-content-between align-items-center">
       Active
-      <!-- <span class="ms-1 rounded-circle p-2 font-12 bg-white fit-content d-inline-block">65</span> -->
     </div>
     <div id="filter-2" role="button" onclick="filterItems(event)"
       class="filter font-md flex-shrink-0 fit-content rounded-pill px-3 py-2 d-flex justify-content-between align-items-center">
       Completed
-      <!-- <span class="ms-1 rounded-circle p-2 font-12 bg-white fit-content d-inline-block">65</span> -->
     </div>
     <div id="filter-0" role="button" onclick="clearCompleted(event)"
       class="filter font-md flex-shrink-0 fit-content rounded-pill px-3 py-2 d-flex justify-content-between align-items-center">
@@ -61,11 +58,16 @@
         <div class="modal-content p-3">
           <h1 class="modal-title fs-3" id="exampleModalLabel">New message</h1>
           <form id="myForm">
-            <!-- <h3 class="modal-title"></h3> -->
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Task Name:</label>
               <input type="text" class="form-control" id="todo-title" required>
             </div>
+            <select name="priority" id="priority" class="d-block mb-3 p-2 form-select" required>
+              <option value=0>High</option>
+              <option value=1>Medium</option>
+              <option value=2>Low</option>
+              <option value=3>No-priority</option>
+            </select>
 
             <button type="button" class="btn btn-secondary" id="modal-cancel" data-bs-dismiss="modal"></button>
             <button type="submit" class="btn btn-primary" id="modal-submit" data-bs-dismiss="modal"></button>
