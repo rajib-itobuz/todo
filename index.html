@@ -26,7 +26,7 @@
   </header>
 
   <section
-    class="filter-section scrollbar-hidden container flex-shrink-0 d-flex my-3 gap-2 overflow-x-scroll justify-content-center">
+    class="filter-section scrollbar-hidden container flex-shrink-0 d-flex my-3 gap-2 overflow-auto justify-content-center">
     <div id="filter-0" role="button" onclick="filterItems(event)"
       class="filter active font-md flex-shrink-0 fit-content rounded-pill px-3 py-2 d-flex justify-content-between align-items-center">
       All Tasks
@@ -34,7 +34,7 @@
     </div>
     <div id="filter-1" role="button" onclick="filterItems(event)"
       class="filter font-md flex-shrink-0 fit-content rounded-pill px-3 py-2 d-flex justify-content-between align-items-center">
-      OnGoing
+      Active
       <!-- <span class="ms-1 rounded-circle p-2 font-12 bg-white fit-content d-inline-block">65</span> -->
     </div>
     <div id="filter-2" role="button" onclick="filterItems(event)"
@@ -42,11 +42,16 @@
       Completed
       <!-- <span class="ms-1 rounded-circle p-2 font-12 bg-white fit-content d-inline-block">65</span> -->
     </div>
+    <div id="filter-0" role="button" onclick="clearCompleted(event)"
+      class="filter font-md flex-shrink-0 fit-content rounded-pill px-3 py-2 d-flex justify-content-between align-items-center">
+      Clear
+    </div>
   </section>
 
-  <section class="container position-relative h-100">
+  <section class="container position-relative h-100 overflow-hidden ">
     <h4 class="mb-2">My Tasks</h4>
-    <div id="todo-container" class="d-flex flex-wrap gap-2">
+    <div id="todo-container"
+      class="d-flex flex-wrap align-content-start gap-2 h-100 pb-5 scrollbar-hidden overflow-y-scroll ">
 
     </div>
 
@@ -61,17 +66,6 @@
               <label for="recipient-name" class="col-form-label">Task Name:</label>
               <input type="text" class="form-control" id="todo-title" required>
             </div>
-            <div class="mb-3">
-              <label for="message-text" class="col-form-label">Subtask:</label>
-              <textarea class="form-control" id="subtask" required></textarea>
-            </div>
-
-            <select name="priority" id="priority" class="d-block mb-3 p-2 form-select" required>
-              <option value=1>High</option>
-              <option value=2>Medium</option>
-              <option value=3>Low</option>
-              <option value=4>No-priority</option>
-            </select>
 
             <button type="button" class="btn btn-secondary" id="modal-cancel" data-bs-dismiss="modal"></button>
             <button type="submit" class="btn btn-primary" id="modal-submit" data-bs-dismiss="modal"></button>

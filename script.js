@@ -1,12 +1,8 @@
 const colors = ["#ccd5ae", "#faedcd", "#f5cac3", "#bde0fe", "#fcf6bd"];
-const priorityColors = ["#ccd5ae", "#faedcd", "#f5cac3", "#bde0fe"];
-const priorityData = ["High", "Medium", "Low", "No-priority"];
 
 const todoContainer = document.getElementById("todo-container");
 const addtodoForm = document.getElementById("myForm");
 const todoTitleInput = document.getElementById("todo-title");
-const subtaskInput = document.getElementById("subtask");
-const priorityStatus = document.getElementById("priority");
 const toaster = document.getElementById("toaster");
 
 const modalSheet = document.getElementById("staticBackdrop");
@@ -30,6 +26,16 @@ const filterItems = (e) => {
 
   filterElements[filterStatus].classList.add("active");
   refreshToDoList();
+};
+
+const clearCompleted = (e) => {
+  todoArr.forEach((e, ind) => {
+    if (e.status === "complete") {
+      todoArr.splice(ind, 1);
+    }
+  });
+  localStorage.setItem("todoList", JSON.stringify(todoArr));
+  filterItems(e);
 };
 
 const completed = (e) => {
@@ -62,8 +68,6 @@ const shareUidtoModal = (e) => {
 const createToDoCard = ({
   uid,
   title,
-  subtask,
-  priority,
   dateObject,
   status,
   backgroundColor,
@@ -80,28 +84,16 @@ const createToDoCard = ({
   );
 
   const titleText = document.createElement("h4");
-  titleText.setAttribute("class", "w-75");
-  titleText.innerText = title;
-
-  const subTitleText = document.createElement("h6");
-  subTitleText.setAttribute("class", "mb-3 w-75 fw-light");
-  subTitleText.innerText = subtask;
-
-  const statusDiv = document.createElement("div");
-  statusDiv.setAttribute("class", "d-flex gap-2");
-
-  const priorityStatus = document.createElement("div");
-  priorityStatus.setAttribute(
+  titleText.setAttribute(
     "class",
-    "active flex-shrink-0 fit-content rounded-pill px-4 font-sm py-2 d-flex justify-content-between align-items-center"
+    "w-75 text-nowrap overflow-x-scroll scrollbar-hidden"
   );
-  priorityStatus.innerText = priorityData[priority];
-  priorityStatus.style.backgroundColor = priorityColors[priority];
+  titleText.innerText = title;
 
   const dateStatus = document.createElement("div");
   dateStatus.setAttribute(
     "class",
-    "active flex-shrink-0 fit-content rounded-pill px-3 py-2 font-sm d-flex gap-1"
+    "active flex-shrink-0 fit-content rounded-pill px-3 py-2 font-sm d-block mt-2"
   );
 
   const dateLogo = document.createElement("img");
@@ -109,17 +101,18 @@ const createToDoCard = ({
   dateLogo.alt = "calendar-logo";
   dateLogo.style.height = "20px";
   dateLogo.style.width = "20px";
+  dateLogo.style.marginRight = "5px";
 
   dateStatus.append(dateLogo, dateObject.substring(4, 15));
 
   const actionDiv = document.createElement("div");
-  actionDiv.setAttribute("class", "d-flex gap-3");
+
   const completedButton = document.createElement("button");
   completedButton.setAttribute("id", `complete-${uid}`);
-  completedButton.innerHTML = "&#x2713; Completed";
+  completedButton.innerHTML = "&#10060; Incomplete";
   completedButton.setAttribute(
     "class",
-    "border border-0 rounded d-inline-block rounded-1 fit-content mt-3 px-2 py-1"
+    "border border-0 rounded d-inline-block rounded-1 fit-content mt-3 me-1 px-2 py-1"
   );
   completedButton.setAttribute("onclick", "completed(event)");
 
@@ -137,13 +130,12 @@ const createToDoCard = ({
   editButton.setAttribute("data-bs-whatever", "Modify To-Do");
 
   if (status === "complete") {
-    completedButton.innerHTML = "&#10060; Incomplete";
+    completedButton.innerHTML = "&#x2713; Completed";
     titleText.style.textDecoration = "line-through";
   }
 
-  actionDiv.append(completedButton, editButton);
-  statusDiv.append(priorityStatus, dateStatus);
-  cardBody.append(titleText, subTitleText, statusDiv, actionDiv);
+  actionDiv.append(dateStatus, completedButton, editButton);
+  cardBody.append(titleText, actionDiv);
   cardDiv.append(cardBody);
 
   todoContainer.append(cardDiv);
@@ -156,20 +148,37 @@ const saveUpdate = () => {
 
 refreshToDoList();
 
+const createToast = (message) => {
+  const newToastDiv = document.createElement("div");
+  newToastDiv.setAttribute("class", "d-flex bg-danger rounded rounded-2");
+
+  const toastBody = document.createElement("div");
+  toastBody.classList.add("toast-body");
+  toastBody.innerText = message;
+
+  const closeBtn = document.createElement("button");
+  closeBtn.type = "button";
+  closeBtn.setAttribute("class", "btn-close btn-close-white me-2 m-auto");
+  closeBtn.setAttribute("data-bs-dismiss", "toast");
+
+  newToastDiv.append(toastBody, closeBtn);
+  toaster.classList.add("show");
+  toaster.append(newToastDiv);
+  setTimeout(() => toaster.removeChild(newToastDiv), 2000);
+};
+
 addtodoForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const todoTitle = todoTitleInput.value.trim();
-  const subtask = subtaskInput.value.trim();
   const dateObject = new Date();
-  const priority = priorityStatus.value;
   const randomIndex = Math.floor(Math.random() * colors.length);
   const backgroundColor = colors[randomIndex];
   if (modalTitle.innerHTML === "Add to-do") {
-    const existingItemIndex = todoArr.findIndex(
+    let existingItemIndex = todoArr.findIndex(
       (item) => item.title === todoTitle
     );
 
-    if (todoTitle !== "" && subtask !== "") {
+    if (todoTitle === "") {
       existingItemIndex = 0;
     }
 
@@ -177,38 +186,21 @@ addtodoForm.addEventListener("submit", (e) => {
       const newtodoItem = {
         uid: dateObject.getTime(),
         title: todoTitle,
-        subtask: subtask,
         dateObject: dateObject.toDateString(),
-        priority,
         status: "incomplete",
         backgroundColor,
       };
       todoArr.push(newtodoItem);
       saveUpdate();
+    } else if (existingItemIndex === 0 && todoTitle === "") {
+      createToast("Cant create blank todo");
     } else {
-      const newToastDiv = document.createElement("div");
-      newToastDiv.setAttribute("class", "d-flex bg-danger rounded rounded-2");
-
-      const toastBody = document.createElement("div");
-      toastBody.classList.add("toast-body");
-      toastBody.innerText = "To-Do Already Exists";
-
-      const closeBtn = document.createElement("button");
-      closeBtn.type = "button";
-      closeBtn.setAttribute("class", "btn-close btn-close-white me-2 m-auto");
-      closeBtn.setAttribute("data-bs-dismiss", "toast");
-
-      newToastDiv.append(toastBody, closeBtn);
-      toaster.classList.add("show");
-      toaster.append(newToastDiv);
-      setTimeout(() => toaster.removeChild(newToastDiv), 2000);
+      createToast("To Do already exists");
     }
   } else {
     const itemUid = modalSheet.dataset.uid;
     const itemIndex = todoArr.findIndex((e) => e.uid === parseInt(itemUid));
     todoArr[itemIndex].title = todoTitleInput.value;
-    todoArr[itemIndex].subtask = subtaskInput.value;
-    todoArr[itemIndex].priority = priorityStatus.value;
     saveUpdate();
   }
 
@@ -244,8 +236,6 @@ if (modalSheet) {
       const itemUid = button.getAttribute("data-uid");
       const itemIndex = todoArr.findIndex((e) => e.uid === parseInt(itemUid));
       todoTitleInput.value = todoArr[itemIndex].title;
-      subtaskInput.value = todoArr[itemIndex].subtask;
-      priorityStatus.value = todoArr[itemIndex].priority;
     }
   });
 }
