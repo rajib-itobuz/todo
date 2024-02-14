@@ -10,6 +10,14 @@
   bottom: 2rem;
 }
 
+.right-10 {
+  right: 2rem;
+}
+
+.top-10 {
+  top: 2rem;
+}
+
 .card-mw {
   width: 100%;
 }
@@ -39,6 +47,10 @@
 
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
+}
+
+#priority {
+  width: 100px;
 }
 
 @media screen and (min-width: 768px) {
