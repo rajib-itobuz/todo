@@ -32,9 +32,9 @@ const filterItems = (e) => {
 };
 
 const clearCompleted = (e) => {
-  todoArr.forEach((e, ind) => {
-    if (e.status === "complete") {
-      todoArr.splice(ind, 1);
+  todoArr.forEach((todoItem, index) => {
+    if (todoItem.status === "complete") {
+      todoArr.splice(index, 1);
     }
   });
   localStorage.setItem("todoList", JSON.stringify(todoArr));
@@ -250,8 +250,6 @@ if (modalSheet) {
       modalCancel.textContent = "Delete";
       modalCancel.style.backgroundColor = "#e63946";
       modalSubmit.textContent = "Modify";
-
-      console.log();
       const itemUid = button.getAttribute("data-uid");
       const itemIndex = todoArr.findIndex((e) => e.uid === parseInt(itemUid));
       todoTitleInput.value = todoArr[itemIndex].title;
