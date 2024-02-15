@@ -12,19 +12,21 @@
 </head>
 
 <body class="d-flex flex-column vh-100">
+  <!-- navbar section -->
   <header class="container pt-3 d-flex align-items-center flex-shrink-0">
     <div class="p-3 rounded-circle bg-primary-subtle fit-content">
       <img src="images/userProf.svg" alt="userIcon" width="30px" height="30px" />
     </div>
     <div class="ms-3">
-      <h3>My tasks</h3>
-      <h6>Lists</h6>
+      <h3>User</h3>
+      <h6>To-Do List</h6>
     </div>
     <div class="p-3 ms-auto rounded-circle bg-mysecondary fit-content">
       <img src="images/bell.svg" alt="userIcon" width="30px" height="30px" />
     </div>
   </header>
 
+  <!-- todolist filter options -->
   <section
     class="filter-section scrollbar-hidden container flex-shrink-0 d-flex my-3 gap-2 overflow-auto justify-content-center">
     <div id="filter-0" role="button" onclick="filterItems(event)"
@@ -45,9 +47,10 @@
     </div>
   </section>
 
+  <!-- todolist display section -->
   <section class="container position-relative h-100 overflow-hidden ">
-    <h4 class="mb-2">My Tasks</h4>
-    <div id="todo-container"
+    <h4 class="mb-2">My To-Dos</h4>
+    <div id="todoContainer"
       class="d-flex flex-wrap align-content-start gap-2 h-100 pb-5 scrollbar-hidden overflow-y-scroll ">
 
     </div>
@@ -56,11 +59,11 @@
     <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content p-3">
-          <h1 class="modal-title fs-3" id="exampleModalLabel">New message</h1>
+          <h1 class="modalTitle fs-3" id="exampleModalLabel">New message</h1>
           <form id="myForm">
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Task Name:</label>
-              <input type="text" class="form-control" id="todo-title" required>
+              <input type="text" class="form-control" id="todoTitle" required>
             </div>
             <select name="priority" id="priority" class="d-block mb-3 p-2 form-select" required>
               <option value=0>High</option>
@@ -69,20 +72,21 @@
               <option value=3>No-priority</option>
             </select>
 
-            <button type="button" class="btn btn-secondary" id="modal-cancel" data-bs-dismiss="modal"></button>
-            <button type="submit" class="btn btn-primary" id="modal-submit" data-bs-dismiss="modal"></button>
+            <button type="button" class="btn btn-secondary" id="modalCancel" data-bs-dismiss="modal"></button>
+            <button type="submit" class="btn btn-primary" id="modalSubmit" data-bs-dismiss="modal"></button>
           </form>
         </div>
       </div>
     </div>
 
-    <button type="button" data-bs-whatever="Add to-do"
+    <button type="button" data-bs-whatever="Add To-Do"
       class="btn btn-primary rounded-circle p-3 bg-primary-accent fit-content position-fixed bottom-10 right-10"
       data-bs-toggle="modal" data-bs-target="#staticBackdrop">
       <img src="images/plus.svg" alt="add-icon" width="30px" height="30px" />
     </button>
   </section>
 
+  <!-- toaster part toast is displayed in this section -->
   <section class="toast position-absolute top-10 right-10 align-items-center text-bg-primary border-0" role="alert"
     id="toaster"></section>
 

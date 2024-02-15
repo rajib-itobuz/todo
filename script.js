@@ -3,15 +3,15 @@ const priorityColors = ["#ccd5ae", "#faedcd", "#f5cac3", "#bde0fe"];
 const priorityData = ["High", "Medium", "Low", "No-priority"];
 const priorityStatus = document.getElementById("priority");
 
-const todoContainer = document.getElementById("todo-container");
+const todoContainer = document.getElementById("todoContainer");
 const addtodoForm = document.getElementById("myForm");
-const todoTitleInput = document.getElementById("todo-title");
+const todoTitleInput = document.getElementById("todoTitle");
 const toaster = document.getElementById("toaster");
 
 const modalSheet = document.getElementById("staticBackdrop");
-const modalTitle = modalSheet.querySelector(".modal-title");
-const modalCancel = document.getElementById("modal-cancel");
-const modalSubmit = document.getElementById("modal-submit");
+const modalTitle = modalSheet.querySelector(".modalTitle");
+const modalCancel = document.getElementById("modalCancel");
+const modalSubmit = document.getElementById("modalSubmit");
 
 let todoArr = [];
 const todoData = localStorage.getItem("todoList");
@@ -124,11 +124,12 @@ const createToDoCard = ({
 
   const completedButton = document.createElement("button");
   completedButton.setAttribute("id", `complete-${uid}`);
-  completedButton.innerHTML = "&#10060; Incomplete";
+  completedButton.innerHTML = "-- Pending";
   completedButton.setAttribute(
     "class",
     "border border-0 rounded d-inline-block rounded-1 fit-content mt-3 me-1 px-2 py-1"
   );
+  completedButton.classList.add("text-danger");
   completedButton.setAttribute("onclick", "completed(event)");
 
   const editButton = document.createElement("button");
@@ -145,6 +146,7 @@ const createToDoCard = ({
   editButton.setAttribute("data-bs-whatever", "Modify To-Do");
 
   if (status === "complete") {
+    completedButton.classList.replace("text-danger", "text-success");
     completedButton.innerHTML = "&#x2713; Completed";
     titleText.style.textDecoration = "line-through";
   }

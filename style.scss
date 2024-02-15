@@ -54,11 +54,12 @@ $inactive-color: #f7f7f7;
 }
 
 
-// css styling
+/*! CSS STYLING */
 #priority {
-    width: 100px;
+    width: 150px;
 }
 
+/*! mediaquery 768px */
 @media screen and (min-width:768px) {
     .card-mw {
         width: 18rem;
