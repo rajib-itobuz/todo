@@ -32,11 +32,7 @@ const filterItems = (e) => {
 };
 
 const clearCompleted = (e) => {
-  todoArr.forEach((todoItem, index) => {
-    if (todoItem.status === "complete") {
-      todoArr.splice(index, 1);
-    }
-  });
+  todoArr = todoArr.filter(todo => todo.status !== 'complete')
   localStorage.setItem("todoList", JSON.stringify(todoArr));
   filterItems(e);
 };
@@ -245,7 +241,6 @@ if (modalSheet) {
 
 
     modalTitle.textContent = newtitle;
-    console.log(newtitle);
     if (newtitle === "Add To-Do") {
       modalCancel.textContent = "Cancel";
       modalCancel.style.backgroundColor = "gray";
