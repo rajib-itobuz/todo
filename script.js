@@ -192,7 +192,7 @@ addtodoForm.addEventListener("submit", (e) => {
   const priority = priorityStatus.value;
   const randomIndex = Math.floor(Math.random() * colors.length);
   const backgroundColor = colors[randomIndex];
-  if (modalTitle.innerHTML === "Add to-do") {
+  if (modalTitle.innerHTML === "Add To-Do") {
     let existingItemIndex = todoArr.findIndex(
       (item) => item.title === todoTitle
     );
@@ -242,9 +242,11 @@ if (modalSheet) {
     addtodoForm.reset();
     const button = event.relatedTarget;
     const newtitle = button.getAttribute("data-bs-whatever");
-    modalTitle.textContent = newtitle;
 
-    if (newtitle === "Add to-do") {
+
+    modalTitle.textContent = newtitle;
+    console.log(newtitle);
+    if (newtitle === "Add To-Do") {
       modalCancel.textContent = "Cancel";
       modalCancel.style.backgroundColor = "gray";
       modalSubmit.textContent = "Submit";
